@@ -158,6 +158,28 @@ func (s *SchemaWrapper) Init() error {
 					},
 					Resolve: s.couponResolver.UpdateCoupons(),
 				},
+				"CreateUserCoupons": &graphql.Field{
+					Type:        graphql.Boolean,
+					Description: "Create user coupon",
+					Args: graphql.FieldConfigArgument{
+						"user_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"coupon_id": &graphql.ArgumentConfig{
+							Type: graphql.Int,
+						},
+						"is_used": &graphql.ArgumentConfig{
+							Type: graphql.Boolean,
+						},
+						"created_at": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+						"updated_at": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+					},
+					Resolve: s.couponResolver.CreateUserCoupons(),
+				},
 			},
 		}),
 

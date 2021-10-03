@@ -168,50 +168,27 @@ func (r *Resolver) CreateCoupons() graphql.FieldResolveFn {
 	}
 }
 
-// func (r *Resolver) CreateProducts() graphql.FieldResolveFn {
-// 	return func(p graphql.ResolveParams) (interface{}, error) {
-// 		name, _ := p.Args["product_name"].(string)
-// 		shop, _ := p.Args["product_shop_name"].(string)
-// 		price, _ := p.Args["product_price"].(float64)
-// 		image, _ := p.Args["product_image"].(string)
+func (r *Resolver) CreateUserCoupons() graphql.FieldResolveFn {
+	return func(p graphql.ResolveParams) (interface{}, error) {
+		user_id, _ := p.Args["user_id"].(int)
+		coupon_id, _ := p.Args["banner_url"].(string)
+		is_used, _ := p.Args["is_used"].(string)
+		createdAt, _ := p.Args["created_at"].(string)
+		updatedAt, _ := p.Args["updated_at"].(string)
 
-// 		req := dictionary.Product{
-// 			Name:         name,
-// 			ShopName:     shop,
-// 			ProductPrice: price,
-// 			ImageURL:     image,
-// 		}
+		req := dictionary.Coupon{
+			UserId: user_id,
+			CouponId: coupon_id,
+			IsUsed: is_used,
+			CreatedAt: createdAt,
+			UpdatedAt: updatedAt,
+		}
 
-// 		_, err := service.CreateProduct(req)
-// 		if err != nil {
-// 			return false, err
-// 		}
+		_, err := service.CreateUserCoupons(req)
+		if err != nil {
+			return false, err
+		}
 
-// 		return true, nil
-// 	}
-// }
-
-// func (r *Resolver) UpdateProducts() graphql.FieldResolveFn {
-// 	return func(p graphql.ResolveParams) (interface{}, error) {
-// 		id, _ := p.Args["product_id"].(int)
-// 		name, _ := p.Args["product_name"].(string)
-// 		shop, _ := p.Args["product_shop_name"].(string)
-// 		price, _ := p.Args["product_price"].(float64)
-// 		image, _ := p.Args["product_image"].(string)
-
-// 		req := dictionary.Product{
-// 			ID:           int64(id),
-// 			Name:         name,
-// 			ShopName:     shop,
-// 			ProductPrice: price,
-// 			ImageURL:     image,
-// 		}
-
-// 		_, err := service.UpdateProduct(req)
-// 		if err != nil {
-// 			return false, err
-// 		}
-
-// 		return true, nil
-// 	}
-// }
+		return true, nil
+	}
+}

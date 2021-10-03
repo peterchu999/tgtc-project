@@ -7,7 +7,7 @@ var UserType = graphql.NewObject(
 		Name:        "User",
 		Description: "Detail of the user",
 		Fields: graphql.Fields{
-			"id": &graphql.Field{
+			"user_id": &graphql.Field{
 				Type: graphql.Int,
 			},
 			"name": &graphql.Field{
@@ -40,7 +40,7 @@ var CouponType = graphql.NewObject(
 		Name:        "Coupon",
 		Description: "Detail of the coupon",
 		Fields: graphql.Fields{
-			"id": &graphql.Field{
+			"coupon_id": &graphql.Field{
 				Type: graphql.Int,
 			},
 			"coupon_name": &graphql.Field{
@@ -86,32 +86,32 @@ var CouponType = graphql.NewObject(
 	},
 )
 
-// var CouponType = graphql.NewObject(
-// 	graphql.ObjectConfig{
-// 		Name:        "Coupon",
-// 		Description: "Detail of the coupon",
-// 		Fields: graphql.Fields{
-// 			"id": &graphql.Field{
-// 				Type: graphql.Int,
-// 			},
-// 			"user_id": &graphql.Field{
-// 				Type: graphql.Int,
-// 			},
-// 			"coupon_id": &graphql.Field{
-// 				Type: graphql.Int,
-// 			},
-// 			"is_used": &graphql.Field{
-// 				Type: graphql.Boolean,
-// 			},
-// 			"created_at": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 			"created_at": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 		},
-// 	},
-// )
+var UserCouponType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name:        "UserCopon",
+		Description: "Detail of the user coupon",
+		Fields: graphql.Fields{
+			"user_coupon_id": &graphql.Field{
+				Type: graphql.Int,
+			},
+			"user_id": &graphql.Field{
+				Type: graphql.Int,
+			},
+			"coupon_id": &graphql.Field{
+				Type: graphql.Int,
+			},
+			"is_used": &graphql.Field{
+				Type: graphql.Boolean,
+			},
+			"created_at": &graphql.Field{
+				Type: graphql.String,
+			},
+			"updated_at": &graphql.Field{
+				Type: graphql.String,
+			},
+		},
+	},
+)
 
 var ResultType = graphql.NewObject(
 	graphql.ObjectConfig{
