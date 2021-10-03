@@ -17,7 +17,7 @@ type CouponRequest struct {
 
 type AddUserListToCouponRequest struct {
 	CouponId int64 `json:coupon_id`
-	UsersEmail [10000]string `json:users_email`
+	UsersEmail [2]string `json:users_email`
 }
 type Coupon struct {
 	ID                int64  `json:"id"`
@@ -62,19 +62,3 @@ type APIResponse struct {
 	Error string      `json:"error_message"`
 }
 
-type Coupon struct {
-	ID                int64   `json:"id"`
-	CouponName        string  `json:"coupon_name"`
-	BannerUrl         string  `json:"banner_url"`
-	Category          string  `json:"category"`
-	Type              string  `json:"type"`
-	CouponPercentage  float64 `json:"coupon_percentage"`
-	CouponMaxNominal  float64 `json:"coupon_max_nominal"`
-	MinTransaction    float64 `json:"min_transaction"`
-	StartDate         string  `json:"start_date"`
-	ExpireDate        string  `json:"expire_date"`
-	TermsAndCondition string  `json:"terms_and_condition"`
-	Guide             string  `json:"guide"`
-	CreatedAt         string  `json:"created_at"`
-	UpdatedAt         string  `json:"updated_at"`
-}

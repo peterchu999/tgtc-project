@@ -101,8 +101,46 @@ func AddUsersToCouponByEmail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Print(addUserListToCouponRequest)
-	addUserListToCouponRequest.CouponId = 1
-	addUserListToCouponRequest.UsersEmail[0] = "test@test.com"
+	// addUserListToCouponRequest.CouponId = 1
+	// addUserListToCouponRequest.UsersEmail[0] = "test@test.com"
+	coupon, _ := service.AddUsersEmailListToCoupon(addUserListToCouponRequest)
+	b, err := json.Marshal(coupon)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+	fmt.Fprintf(w, string(b))
+}
+
+func UpdateCoupon(w http.ResponseWriter, r *http.Request) {
+
+	var c dictionary.Coupon
+	fmt.Print(r.Body)
+	if err := json.NewDecoder(r.Body).Decode(&c); err != nil {
+		http.Error(w, "bad request", 400)
+		return
+	}
+
+	coupon, _ := service.UpdateCouponWhenLive(c)
+	b, err := json.Marshal(coupon)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+	fmt.Fprintf(w, string(b))
+}
+
+func getUsersToCouponByEmail(w http.ResponseWriter, r *http.Request) {
+
+	var addUserListToCouponRequest dictionary.AddUserListToCouponRequest
+	fmt.Print(r.Body)
+	if err := json.NewDecoder(r.Body).Decode(&addUserListToCouponRequest); err != nil {
+		http.Error(w, "bad request", 400)
+		return
+	}
+	fmt.Print(addUserListToCouponRequest)
+	// addUserListToCouponRequest.CouponId = 1
+	// addUserListToCouponRequest.UsersEmail[0] = "test@test.com"
 	coupon, _ := service.AddUsersEmailListToCoupon(addUserListToCouponRequest)
 	b, err := json.Marshal(coupon)
     if err != nil {

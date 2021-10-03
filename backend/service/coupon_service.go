@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/radityaqb/tgtc/backend/database"
-	model "github.com/radityaqb/tgtc/backend/dictionary"
+	"github.com/peterchu999/tgtc/backend/database"
+	model "github.com/peterchu999/tgtc/backend/dictionary"
 )
 
 func UpdateCouponWhenLive(coupon model.Coupon) (interface{}, error) {
