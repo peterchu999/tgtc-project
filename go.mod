@@ -1,4 +1,4 @@
-module github.com/radityaqb/tgtc
+module github.com/peterchu999/tgtc
 
 go 1.17
 

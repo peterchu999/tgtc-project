@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/radityaqb/tgtc/backend/dictionary"
+	"github.com/peterchu999/tgtc/backend/dictionary"
 )
 
 var (

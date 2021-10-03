@@ -2,8 +2,8 @@ package gqlserver
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/radityaqb/tgtc/backend/dictionary"
-	"github.com/radityaqb/tgtc/backend/service"
+	"github.com/peterchu999/tgtc/backend/dictionary"
+	"github.com/peterchu999/tgtc/backend/service"
 )
 
 type Resolver struct {

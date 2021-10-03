@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/radityaqb/tgtc/backend/server"
-	"github.com/radityaqb/tgtc/gql/gqlserver"
+	"github.com/peterchu999/tgtc/backend/server"
+	"github.com/peterchu999/tgtc/gql/gqlserver"
 )
 
 func main() {

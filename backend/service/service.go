@@ -3,8 +3,8 @@ package service
 import (
 	"errors"
 
-	"github.com/radityaqb/tgtc/backend/database"
-	"github.com/radityaqb/tgtc/backend/dictionary"
+	"github.com/peterchu999/tgtc/backend/database"
+	"github.com/peterchu999/tgtc/backend/dictionary"
 )
 
 func GetProduct(paramID int) (*dictionary.Product, error) {

@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/radityaqb/tgtc/backend/database"
-	"github.com/radityaqb/tgtc/backend/handlers"
-	"github.com/radityaqb/tgtc/backend/server"
+	"github.com/peterchu999/tgtc/backend/database"
+	"github.com/peterchu999/tgtc/backend/handlers"
+	"github.com/peterchu999/tgtc/backend/server"
 )
 
 func main() {
