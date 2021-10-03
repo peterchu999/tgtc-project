@@ -32,6 +32,7 @@ func main() {
 	// router.HandleFunc("/delete-product", handlers.DeleteProduct).Methods(http.MethodDelete)
 	router.HandleFunc("/add-coupon", handlers.AddCoupon).Methods(http.MethodPost)
 	router.HandleFunc("/add-user-to-coupon-list", handlers.AddUsersToCouponByEmail).Methods(http.MethodPost)
+	router.HandleFunc("/get-by-user", handlers.GetUsersToCouponByEmail).Methods(http.MethodPost)
 
 	serverConfig := server.Config{
 		WriteTimeout: 5 * time.Second,

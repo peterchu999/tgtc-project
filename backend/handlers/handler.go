@@ -101,8 +101,8 @@ func AddUsersToCouponByEmail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Print(addUserListToCouponRequest)
-	// addUserListToCouponRequest.CouponId = 1
-	// addUserListToCouponRequest.UsersEmail[0] = "test@test.com"
+	addUserListToCouponRequest.CouponId = 1
+	addUserListToCouponRequest.UsersEmail[0] = "test@test.com"
 	coupon, _ := service.AddUsersEmailListToCoupon(addUserListToCouponRequest)
 	b, err := json.Marshal(coupon)
     if err != nil {
@@ -130,7 +130,7 @@ func UpdateCoupon(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(b))
 }
 
-func getUsersToCouponByEmail(w http.ResponseWriter, r *http.Request) {
+func GetUsersToCouponByEmail(w http.ResponseWriter, r *http.Request) {
 
 	var getCouponToUserEmailRequest string
 	fmt.Print(r.Body)

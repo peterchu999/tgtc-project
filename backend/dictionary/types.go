@@ -21,7 +21,7 @@ type GetCouponToUserEmailRequest struct{
 
 type AddUserListToCouponRequest struct {
 	CouponId int64 `json:coupon_id`
-	UsersEmail [2]string `json:users_email`
+	UsersEmail [1]string `json:users_email`
 }
 type Coupon struct {
 	ID                int64  `json:"id"`
