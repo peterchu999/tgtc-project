@@ -10,9 +10,9 @@ import (
 const (
 	host     = "localhost"
 	port     = 5432
-	user     = "postgres"
-	password = "zamarano9"
-	dbname   = "toped"
+	user     = "peterandrew"
+	password = "pass99word"
+	dbname   = "tgtc-project"
 )
 
 var DB *sql.DB

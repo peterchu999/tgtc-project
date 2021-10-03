@@ -26,10 +26,12 @@ func main() {
 	// endpoint : /get-product?id=
 	// endpoint : /update-product
 	// endpoint : /delete-product
-	router.HandleFunc("/add-product", handlers.AddProduct).Methods(http.MethodPost)
-	router.HandleFunc("/get-product", handlers.GetProduct).Methods(http.MethodGet)
-	router.HandleFunc("/update-product", handlers.UpdateProduct).Methods(http.MethodPatch)
-	router.HandleFunc("/delete-product", handlers.DeleteProduct).Methods(http.MethodDelete)
+	// router.HandleFunc("/add-product", handlers.AddProduct).Methods(http.MethodPost)
+	// router.HandleFunc("/get-product", handlers.GetProduct).Methods(http.MethodGet)
+	// router.HandleFunc("/update-product", handlers.UpdateProduct).Methods(http.MethodPatch)
+	// router.HandleFunc("/delete-product", handlers.DeleteProduct).Methods(http.MethodDelete)
+	router.HandleFunc("/add-coupon", handlers.AddCoupon).Methods(http.MethodPost)
+	router.HandleFunc("/add-user-to-coupon-list", handlers.AddUsersToCouponByEmail).Methods(http.MethodPost)
 
 	serverConfig := server.Config{
 		WriteTimeout: 5 * time.Second,
