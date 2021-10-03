@@ -1,77 +1,160 @@
 package handlers
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/peterchu999/tgtc/backend/dictionary"
-	"github.com/peterchu999/tgtc/backend/domain/product"
+	"github.com/peterchu999/tgtc/backend/service"
 )
 
 func Ping(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "pong\n")
 }
 
-func AddProduct(w http.ResponseWriter, r *http.Request) {
+// func AddProduct(w http.ResponseWriter, r *http.Request) {
 
-	var p dictionary.Product
+// 	var p dictionary.Product
 
-	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+// 	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+// 		http.Error(w, "bad request", 400)
+// 		return
+// 	}
+
+// 	p = product.AddProduct(context.Background(), p)
+// 	fmt.Fprintf(w, fmt.Sprint("success, id product : ", p.ID))
+// }
+
+// func GetProduct(w http.ResponseWriter, r *http.Request) {
+// 	idstring := r.URL.Query().Get("id")
+
+// 	idInt64, err := strconv.ParseInt(idstring, 10, 64)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+
+// 	p, err := product.GetProduct(context.Background(), idInt64)
+// 	if err != nil {
+// 		// log.Fatal(err)
+// 		fmt.Fprintf(w, err.Error())
+// 	}
+
+// 	val, err := json.Marshal(p)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+
+// 	fmt.Fprintf(w, string(val))
+// }
+
+// func DeleteProduct(w http.ResponseWriter, r *http.Request) {
+// 	var p dictionary.Product
+
+// 	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+// 		http.Error(w, "bad request", 400)
+// 		return
+// 	}
+
+// 	product.DeleteProduct(context.Background(), p.ID)
+// 	fmt.Fprintf(w, "success")
+// }
+
+// func UpdateProduct(w http.ResponseWriter, r *http.Request) {
+// 	var p dictionary.Product
+
+// 	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+// 		http.Error(w, "bad request", 400)
+// 		return
+// 	}
+
+// 	product.UpdateProduct(context.Background(), p)
+
+// 	fmt.Fprintf(w, "success")
+// }
+
+
+func AddCoupon(w http.ResponseWriter, r *http.Request) {
+
+	var c dictionary.CouponRequest
+	fmt.Print(r.Body)
+	if err := json.NewDecoder(r.Body).Decode(&c); err != nil {
 		http.Error(w, "bad request", 400)
 		return
 	}
 
-	p = product.AddProduct(context.Background(), p)
-	fmt.Fprintf(w, fmt.Sprint("success, id product : ", p.ID))
+	coupon, _ := service.CreateCoupon(c)
+	b, err := json.Marshal(coupon)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+	fmt.Fprintf(w, string(b))
 }
 
-func GetProduct(w http.ResponseWriter, r *http.Request) {
-	idstring := r.URL.Query().Get("id")
+func AddUsersToCouponByEmail(w http.ResponseWriter, r *http.Request) {
 
-	idInt64, err := strconv.ParseInt(idstring, 10, 64)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	p, err := product.GetProduct(context.Background(), idInt64)
-	if err != nil {
-		// log.Fatal(err)
-		fmt.Fprintf(w, err.Error())
-	}
-
-	val, err := json.Marshal(p)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Fprintf(w, string(val))
-}
-
-func DeleteProduct(w http.ResponseWriter, r *http.Request) {
-	var p dictionary.Product
-
-	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+	var addUserListToCouponRequest dictionary.AddUserListToCouponRequest
+	fmt.Print(r.Body)
+	if err := json.NewDecoder(r.Body).Decode(&addUserListToCouponRequest); err != nil {
 		http.Error(w, "bad request", 400)
 		return
 	}
-
-	product.DeleteProduct(context.Background(), p.ID)
-	fmt.Fprintf(w, "success")
+	fmt.Print(addUserListToCouponRequest)
+	addUserListToCouponRequest.CouponId = 1
+	addUserListToCouponRequest.UsersEmail[0] = "test@test.com"
+	coupon, _ := service.AddUsersEmailListToCoupon(addUserListToCouponRequest)
+	b, err := json.Marshal(coupon)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+	fmt.Fprintf(w, string(b))
 }
 
-func UpdateProduct(w http.ResponseWriter, r *http.Request) {
-	var p dictionary.Product
+// func GetProduct(w http.ResponseWriter, r *http.Request) {
+// 	idstring := r.URL.Query().Get("id")
 
-	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
-		http.Error(w, "bad request", 400)
-		return
-	}
+// 	idInt64, err := strconv.ParseInt(idstring, 10, 64)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
 
-	product.UpdateProduct(context.Background(), p)
+// 	p, err := product.GetProduct(context.Background(), idInt64)
+// 	if err != nil {
+// 		// log.Fatal(err)
+// 		fmt.Fprintf(w, err.Error())
+// 	}
 
-	fmt.Fprintf(w, "success")
-}
+// 	val, err := json.Marshal(p)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+
+// 	fmt.Fprintf(w, string(val))
+// }
+
+// func DeleteProduct(w http.ResponseWriter, r *http.Request) {
+// 	var p dictionary.Product
+
+// 	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+// 		http.Error(w, "bad request", 400)
+// 		return
+// 	}
+
+// 	product.DeleteProduct(context.Background(), p.ID)
+// 	fmt.Fprintf(w, "success")
+// }
+
+// func UpdateProduct(w http.ResponseWriter, r *http.Request) {
+// 	var p dictionary.Product
+
+// 	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+// 		http.Error(w, "bad request", 400)
+// 		return
+// 	}
+
+// 	product.UpdateProduct(context.Background(), p)
+
+// 	fmt.Fprintf(w, "success")
+// }
