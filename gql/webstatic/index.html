@@ -7,18 +7,19 @@
 -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      body {
-        height: 100%;
-        margin: 0;
-        width: 100%;
-        overflow: hidden;
-      }
 
-      #graphiql {
-        height: 100vh;
-      }
+<head>
+    <style>
+        body {
+            height: 100%;
+            margin: 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #graphiql {
+            height: 100vh;
+        }
     </style>
 
     <!--
@@ -28,14 +29,8 @@
       If you do not want to rely on a CDN, you can host these files locally or
       include them directly in your favored resource bunder.
     -->
-    <script
-      src="js/react.production.min.js"
-      type="application/javascript"
-    ></script>
-    <script
-      src="js/react-dom.production.min.js"
-      type="application/javascript"
-    ></script>
+    <script src="js/react.production.min.js" type="application/javascript"></script>
+    <script src="js/react-dom.production.min.js" type="application/javascript"></script>
 
     <!--
       These two files can be found in the npm module, however you may wish to
@@ -43,28 +38,29 @@
       favored resource bundler.
      -->
     <link rel="stylesheet" href="css/graphiql.min.css" />
-  </head>
+</head>
 
-  <body>
+<body>
     <div id="graphiql">Loading...</div>
     <script src="js/graphiql.min.js" type="application/javascript"></script>
     <!-- <script src="/renderExample.js" type="application/javascript"></script> -->
     <script>
-      function graphQLFetcher(graphQLParams) {
-        return fetch(window.location.origin + "/graphql", {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(graphQLParams),
-        }).then(function (response) {
-          return response.json();
-        });
-      }
+        function graphQLFetcher(graphQLParams) {
+            return fetch(window.location.origin + '/graphql', {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(graphQLParams)
+            }).then(function (response) {
+                return response.json()
+            });
+        }
 
-      ReactDOM.render(
-        React.createElement(GraphiQL, {
-          fetcher: graphQLFetcher,
-          defaultVariableEditorOpen: true,
-          defaultQuery: `# Welcome to GraphiQL
+        ReactDOM.render(
+            React.createElement(GraphiQL, {
+                fetcher: graphQLFetcher,
+                defaultVariableEditorOpen: true,
+                defaultQuery:
+`# Welcome to GraphiQL
 #
 # GraphiQL is an in-browser tool for writing, validating, and
 # testing GraphQL queries.
@@ -89,10 +85,25 @@
 #     Merge Query:  Shift-Ctrl-M (or press the merge button above)
 #       Run Query:  Ctrl-Enter (or press the play button above)
 #   Auto Complete:  Ctrl-Space (or just start typing)
-`,
-        }),
-        document.getElementById("graphiql")
-      );
+
+query getQuery {
+  ProductDetail(product_id: 1) {
+    id
+  }
+}
+
+mutation updateQuery {
+  CreateProduct(
+    product_name: "test"
+  ) {
+    id
+  }
+}
+`
+            }),
+            document.getElementById('graphiql'),
+        );
     </script>
-  </body>
+</body>
+
 </html>

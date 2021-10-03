@@ -1,30 +1,103 @@
 package gqlserver
 
 import (
-	"fmt"
-
 	"github.com/graphql-go/graphql"
-	"github.com/peterchu999/tgtc-project/gql/gqlserver/resolvers"
 )
 
-
-var queryType = graphql.NewObject(graphql.ObjectConfig{
-    Name: "Query",
-    Fields: graphql.Fields{
-        "query1": &graphql.Field{
-            Type: graphql.String,
-			Args: graphql.FieldConfigArgument{},
-            Resolve: resolvers.GetAllCoupon(),
-        },
-    },
-})
-
-
-func Init() graphql.Schema {
-	var Schema, err = graphql.NewSchema(graphql.SchemaConfig{
-    Query: queryType,
-	})
-	fmt.Print(err)
-	return Schema
+type SchemaWrapper struct {
+	productResolver *Resolver
+	Schema          graphql.Schema
 }
 
+func NewSchemaWrapper() *SchemaWrapper {
+	return &SchemaWrapper{}
+}
+
+func (s *SchemaWrapper) WithProductResolver(pr *Resolver) *SchemaWrapper {
+	s.productResolver = pr
+
+	return s
+}
+
+func (s *SchemaWrapper) Init() error {
+	// add gql schema as needed
+	schema, err := graphql.NewSchema(graphql.SchemaConfig{
+		Query: graphql.NewObject(graphql.ObjectConfig{
+			Name:        "UserGetter",
+			Description: "All query related to getting user data",
+			Fields: graphql.Fields{
+				"UserDetail": &graphql.Field{
+					Type:        ProductType,
+					Description: "Get user by ID",
+					Args: graphql.FieldConfigArgument{
+						"user_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+					},
+					Resolve: s.productResolver.GetUser(),
+				},
+				"User": &graphql.Field{
+					Type:        graphql.NewList(ProductType),
+					Description: "Get users",
+					Resolve:     s.productResolver.GetUsers(),
+				},
+			},
+		}),
+		// uncomment this and add objects for mutation
+		Mutation: graphql.NewObject(graphql.ObjectConfig{
+			Name:        "ProductSetter",
+			Description: "All query related to modify product data",
+			Fields: graphql.Fields{
+				"CreateProduct": &graphql.Field{
+					Type:        graphql.Boolean,
+					Description: "Create product",
+					Args: graphql.FieldConfigArgument{
+						"product_name": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"product_shop_name": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+						"product_price": &graphql.ArgumentConfig{
+							Type: graphql.Float,
+						},
+						"product_image": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+					},
+					Resolve: s.productResolver.CreateProducts(),
+				},
+				"UpdateProduct": &graphql.Field{
+					Type:        graphql.Boolean,
+					Description: "Update product by ID",
+					Args: graphql.FieldConfigArgument{
+						"product_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"product_name": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"product_shop_name": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+						"product_price": &graphql.ArgumentConfig{
+							Type: graphql.Float,
+						},
+						"product_image": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+					},
+					Resolve: s.productResolver.UpdateProducts(),
+				},
+			},
+		}),
+	})
+
+	if err != nil {
+		return err
+	}
+
+	s.Schema = schema
+
+	return nil
+}
