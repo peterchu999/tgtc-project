@@ -2,10 +2,10 @@ package gqlserver
 
 import "github.com/graphql-go/graphql"
 
-var ProductType = graphql.NewObject(
+var UserType = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name:        "Product",
-		Description: "Detail of the product",
+		Name:        "User",
+		Description: "Detail of the user",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
 				Type: graphql.Int,
@@ -13,18 +13,105 @@ var ProductType = graphql.NewObject(
 			"name": &graphql.Field{
 				Type: graphql.String,
 			},
-			"product_price": &graphql.Field{
-				Type: graphql.Float,
-			},
-			"image_url": &graphql.Field{
+			"birth_date": &graphql.Field{
 				Type: graphql.String,
 			},
-			"shop_name": &graphql.Field{
+			"email": &graphql.Field{
+				Type: graphql.String,
+			},
+			"phone_number": &graphql.Field{
+				Type: graphql.String,
+			},
+			"membership": &graphql.Field{
+				Type: graphql.String,
+			},
+			"created_at": &graphql.Field{
+				Type: graphql.String,
+			},
+			"updated_at": &graphql.Field{
 				Type: graphql.String,
 			},
 		},
 	},
 )
+
+var CouponType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name:        "Coupon",
+		Description: "Detail of the coupon",
+		Fields: graphql.Fields{
+			"id": &graphql.Field{
+				Type: graphql.Int,
+			},
+			"coupon_name": &graphql.Field{
+				Type: graphql.String,
+			},
+			"banner_url": &graphql.Field{
+				Type: graphql.String,
+			},
+			"category": &graphql.Field{
+				Type: graphql.String,
+			},
+			"type": &graphql.Field{
+				Type: graphql.String,
+			},
+			"coupon_percentage": &graphql.Field{
+				Type: graphql.Float,
+			},
+			"coupon_max_nominal": &graphql.Field{
+				Type: graphql.Float,
+			},
+			"min_transaction": &graphql.Field{
+				Type: graphql.Float,
+			},
+			"start_date": &graphql.Field{
+				Type: graphql.String,
+			},
+			"expire_date": &graphql.Field{
+				Type: graphql.String,
+			},
+			"terms_and_condition": &graphql.Field{
+				Type: graphql.String,
+			},
+			"guide": &graphql.Field{
+				Type: graphql.String,
+			},
+			"created_at": &graphql.Field{
+				Type: graphql.String,
+			},
+			"updated_at": &graphql.Field{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
+// var CouponType = graphql.NewObject(
+// 	graphql.ObjectConfig{
+// 		Name:        "Coupon",
+// 		Description: "Detail of the coupon",
+// 		Fields: graphql.Fields{
+// 			"id": &graphql.Field{
+// 				Type: graphql.Int,
+// 			},
+// 			"user_id": &graphql.Field{
+// 				Type: graphql.Int,
+// 			},
+// 			"coupon_id": &graphql.Field{
+// 				Type: graphql.Int,
+// 			},
+// 			"is_used": &graphql.Field{
+// 				Type: graphql.Boolean,
+// 			},
+// 			"created_at": &graphql.Field{
+// 				Type: graphql.String,
+// 			},
+// 			"created_at": &graphql.Field{
+// 				Type: graphql.String,
+// 			},
+// 		},
+// 	},
+// )
 
 var ResultType = graphql.NewObject(
 	graphql.ObjectConfig{

@@ -4,3 +4,5 @@ github.com/graphql-go/graphql v0.8.0 h1:JHRQMeQjofwqVvGwYnr8JnPTY0AxgVy1HpHSGPLd
 github.com/graphql-go/graphql v0.8.0/go.mod h1:nKiHzRM0qopJEwCITUuIsxk9PlVlwIiiI8pnJEhordQ=
 github.com/lib/pq v1.10.3 h1:v9QZf2Sn6AmjXtQeFpdoq/eaNtYP6IN+7lcrygsIAtg=
 github.com/lib/pq v1.10.3/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
+github.com/radityaqb/tgtc v0.0.0-20211001112244-1c74f17fa8b5 h1:SBY7j4jeTwP67yO6Fzf0KChK5+g7uzufdWgVLodZ+hc=
+github.com/radityaqb/tgtc v0.0.0-20211001112244-1c74f17fa8b5/go.mod h1:cKr5zxLIkXYC+b+Msl0ltxZ64VPILi63ggzC++IleRA=
