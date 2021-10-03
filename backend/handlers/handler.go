@@ -121,7 +121,7 @@ func UpdateCoupon(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	coupon, _ := service.UpdateCouponWhenLive(c)
+	coupon, _ := service.UpdateCouponWhenNotLive(c)
 	b, err := json.Marshal(coupon)
     if err != nil {
         fmt.Println(err)
@@ -132,16 +132,16 @@ func UpdateCoupon(w http.ResponseWriter, r *http.Request) {
 
 func getUsersToCouponByEmail(w http.ResponseWriter, r *http.Request) {
 
-	var addUserListToCouponRequest dictionary.AddUserListToCouponRequest
+	var getCouponToUserEmailRequest string
 	fmt.Print(r.Body)
-	if err := json.NewDecoder(r.Body).Decode(&addUserListToCouponRequest); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&getCouponToUserEmailRequest); err != nil {
 		http.Error(w, "bad request", 400)
 		return
 	}
-	fmt.Print(addUserListToCouponRequest)
+	fmt.Print(getCouponToUserEmailRequest)
 	// addUserListToCouponRequest.CouponId = 1
 	// addUserListToCouponRequest.UsersEmail[0] = "test@test.com"
-	coupon, _ := service.AddUsersEmailListToCoupon(addUserListToCouponRequest)
+	coupon, _ := service.GetCouponWithUserEmail(getCouponToUserEmailRequest)
 	b, err := json.Marshal(coupon)
     if err != nil {
         fmt.Println(err)
