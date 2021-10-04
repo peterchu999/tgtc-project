@@ -137,7 +137,7 @@ func UpdateCouponWhenNotLive(coupon model.Coupon) (interface{}, error) {
 		fmt.Println("coupon with id " + strconv.Itoa(int(coupon.ID)) + " not Found")
 		return "coupon with id " + strconv.Itoa(int(coupon.ID)) + " not Found", nil
 	}
-
+	
 	startCoupon, err := time.Parse(time.RFC3339, c.StartDate)
 	if err != nil {
 		fmt.Println(err)
